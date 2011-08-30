@@ -27,7 +27,7 @@ gem 'jquery-rails',   "~> 1.0.13"
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
-
+  gem 'rspec-rails',              '~> 2.6.1'
   gem 'guard-rspec',              '>= 0.4.3'
   gem 'guard-spork',              '>= 0.2.1'
   gem 'rb-fsevent',               '>= 0.4.3'
