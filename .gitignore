@@ -1,0 +1,16 @@
+.bundle
+db/*.sqlite3
+db/schema.rb
+db/.DS_Store
+log/*.log
+tmp/**/*
+*~
+.#*
+#*
+*#
+tmtags
+config/database.yml
+public/uploads/**/*
+.sass-cache/
+public/assets/
+uploads/*

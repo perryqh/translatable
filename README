@@ -1,0 +1,3 @@
+== Translatable
+
+Rails front-end for setting I18n translations in redis
