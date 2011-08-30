@@ -1,0 +1,13 @@
+defaults: &defaults
+  redis_url: redis://localhost:23682/2/i18n
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  redis_url: redis://localhost:23682/3/i18n
+
+production:
+  <<: *defaults
+  redis_url: redis://localhost:23682/1/i18n

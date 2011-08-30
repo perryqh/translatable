@@ -7,8 +7,7 @@ gem 'settingslogic',  '~> 2.0.6'
 gem 'redis',          '~> 2.2.2'
 gem "redis-store",    '~> 1.0.0.rc1'
 
-gem 'pg'
-
+gem 'sqlite3'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,0 +1,9 @@
+.grid-view
+  %table.grid
+    %tr
+      %th.key Key
+      %th.value Value
+      - for translation in translations
+        %tr.row
+          %td.key= translation.key
+          %td.value= translation.value
