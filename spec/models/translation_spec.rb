@@ -2,16 +2,12 @@ require 'spec_helper'
 
 describe Translation do
   before(:each) do
-    Translation.store.flushdb
+    Translation.send(:store).flushdb
   end
 
   describe "formatted key" do
     it "should properly format key with locale" do
-      Translation.send(:formatted_key, "en-US", "taco").should == 'i18n:en-US.taco'
-    end
-
-    it "should properly format key prefix" do
-      Translation.send(:key_prefix, "en-US").should == 'i18n:en-US'
+      Translation.send(:formatted_key, "en-US", "taco").should == 'en-US.taco'
     end
   end
 
@@ -32,7 +28,7 @@ describe Translation do
   describe "create and read" do
     it "should create and read translation by locale" do
       Translation.create('en-US', 'foo', 'bar')
-      Translation.store['i18n:en-US.foo'].should == 'bar'
+      Translation.send(:store)['en-US.foo'].should == 'bar'
       Translation.locale_value('en-US', 'foo').should == 'bar'
       Translation.locale_value('es-ES', 'foo').should be_nil
     end
