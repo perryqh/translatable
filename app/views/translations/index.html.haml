@@ -6,4 +6,5 @@
       - for translation in translations
         %tr.row
           %td.key= translation.key
-          %td.value= translation.value
+          %td.value
+            %span.editable= translation.value

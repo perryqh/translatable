@@ -5,5 +5,15 @@
 // the compiled file.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
+//= require ../../../vendor/assets/javascripts/externals
 //= require_tree .
+
+$(function() {
+  $('.editable').inlineEdit({
+    save: function(e, data) {
+      return confirm('Change name to '+ data.value +'?');
+    }
+  });
+});
