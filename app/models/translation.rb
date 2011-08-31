@@ -30,26 +30,27 @@ class Translation
       }.compact
     end
 
-    # Get all keys for a given locale removing the locale from
-    # the key and sorting them alphabetically. If a key is named
-    # "en.foo.bar", this method will return it as "foo.bar".
+    def locales
+      store.keys('i18n:*').collect{|key| /i18n\:([A-Za-z-]+)\./.match(key)[1]}.uniq.sort
+    end
+
     def available_keys(locale)
-      keys  = store.keys("#{locale}.*")
-      range = Range.new(locale.size + 1, -1)
+      keys  = store.keys("#{key_prefix(locale)}.*")
+      range = Range.new(key_prefix(locale).size + 1, -1)
       keys.collect { |k| k.slice(range) }.sort!
     end
 
-    # Get the stored value in the translator store for a given
-    # locale. This method needs to decode values and check if they
-    # are a hash, because we don't want subtrees available for
-    # translation since they are managed automatically by I18n.
     def locale_value(locale, key)
       store[formatted_key(locale, key)]
     end
 
-    private 
+    private
     def formatted_key(locale, key)
-      "#{locale}.#{key}"
+      "#{key_prefix(locale)}.#{key}"
+    end
+
+    def key_prefix(locale)
+      "i18n:#{locale}"
     end
   end
 end

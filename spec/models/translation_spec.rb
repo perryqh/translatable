@@ -7,14 +7,32 @@ describe Translation do
 
   describe "formatted key" do
     it "should properly format key with locale" do
-      Translation.send(:formatted_key, "en-US", "taco").should == 'en-US.taco'
+      Translation.send(:formatted_key, "en-US", "taco").should == 'i18n:en-US.taco'
     end
+
+    it "should properly format key prefix" do
+      Translation.send(:key_prefix, "en-US").should == 'i18n:en-US'
+    end
+  end
+
+  describe "locales" do
+    before(:each) do
+      Translation.create('en-US', 'jimmy', 'joe')
+      Translation.create('en-US', 'jimmy', 'jack')
+      Translation.create('xx-YY', 'jimmy', 'joe')
+      Translation.create('xx-YY', 'timmy', 'joe')
+      Translation.create('ss-SS', 'jimmy', 'joe')
+      Translation.create('aa-AA', 'jimmy', 'joe')
+      Translation.create('en-US', 'jimmy', 'joe')
+    end
+
+    specify { Translation.locales.should == ['aa-AA', 'en-US', 'ss-SS', 'xx-YY']}
   end
 
   describe "create and read" do
     it "should create and read translation by locale" do
       Translation.create('en-US', 'foo', 'bar')
-      Translation.store['en-US.foo'].should == 'bar'
+      Translation.store['i18n:en-US.foo'].should == 'bar'
       Translation.locale_value('en-US', 'foo').should == 'bar'
       Translation.locale_value('es-ES', 'foo').should be_nil
     end
