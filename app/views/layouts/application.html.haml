@@ -2,8 +2,21 @@
 %html
   %head
     %title Translatable
+
+    = stylesheet_link_tag '/stylesheets/blueprint/screen', :media => 'screen, projection'
+    = stylesheet_link_tag '/stylesheets/blueprint/print', :media => 'print'
+    /[if lt IE 8]
+      = stylesheet_link_tag "/stylesheets/blueprint/ie.css", :media => "screen, projection"
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
+
+    %link{:rel => "Shortcut Icon", :type => "image/ico", :href => asset_path("favicon.png")}
+
   %body
-    = yield
+    %header
+      #logo
+
+    %section#content= yield
+
+    %footer
