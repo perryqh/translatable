@@ -24,7 +24,7 @@
             url: $(this).attr('data-url'),
             data: { '_method': 'put', key: $(this).attr('data-key'), value: data.value },
             success: function(response) {
-              alert('el');
+              
             }
           };
           $.ajax(ajaxOptions);
