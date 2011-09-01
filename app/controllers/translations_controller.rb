@@ -1,6 +1,14 @@
 class TranslationsController < ApplicationController
+  respond_to :html, :json
+
   def index
 
+  end
+
+  def update
+    Translation.save(locale, params[:key], params[:value])
+
+    render :nothing => true, :status => 200
   end
 
   private
@@ -11,6 +19,6 @@ class TranslationsController < ApplicationController
   end
 
   def locale
-    @locale ||= session[:locale] = (params[:locale] || session[:locale] || "en")
+    @locale ||= session[:locale] = (params[:locale] || session[:locale] || "en-US")
   end
 end

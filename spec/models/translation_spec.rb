@@ -13,13 +13,13 @@ describe Translation do
 
   describe "locales" do
     before(:each) do
-      Translation.create('en-US', 'jimmy', 'joe')
-      Translation.create('en-US', 'jimmy', 'jack')
-      Translation.create('xx-YY', 'jimmy', 'joe')
-      Translation.create('xx-YY', 'timmy', 'joe')
-      Translation.create('ss-SS', 'jimmy', 'joe')
-      Translation.create('aa-AA', 'jimmy', 'joe')
-      Translation.create('en-US', 'jimmy', 'joe')
+      Translation.save('en-US', 'jimmy', 'joe')
+      Translation.save('en-US', 'jimmy', 'jack')
+      Translation.save('xx-YY', 'jimmy', 'joe')
+      Translation.save('xx-YY', 'timmy', 'joe')
+      Translation.save('ss-SS', 'jimmy', 'joe')
+      Translation.save('aa-AA', 'jimmy', 'joe')
+      Translation.save('en-US', 'jimmy', 'joe')
     end
 
     specify { Translation.locales.should == ['aa-AA', 'en-US', 'ss-SS', 'xx-YY']}
@@ -27,15 +27,15 @@ describe Translation do
 
   describe "create and read" do
     it "should create and read translation by locale" do
-      Translation.create('en-US', 'foo', 'bar')
+      Translation.save('en-US', 'foo', 'bar')
       Translation.send(:store)['en-US.foo'].should == 'bar'
       Translation.locale_value('en-US', 'foo').should == 'bar'
       Translation.locale_value('es-ES', 'foo').should be_nil
     end
 
     it "should include all key values" do
-      Translation.create('en-US', 'jimmy', 'joe')
-      Translation.create('en-US', 'timmy', 'toe')
+      Translation.save('en-US', 'jimmy', 'joe')
+      Translation.save('en-US', 'timmy', 'toe')
 
       Translation.available_keys('en-US').include?('jimmy').should be_true
       Translation.available_keys('en-US').include?('timmy').should be_true
@@ -54,7 +54,7 @@ describe Translation do
   describe "reload!" do
     it "should flush and load the translations" do
       Translation.available_keys('en-US').should be_empty
-      Translation.create('en-US', 'timmy', 'joe')
+      Translation.save('en-US', 'timmy', 'joe')
       Translation.available_keys('en-US').count.should == 1
 
       Translation.reload!

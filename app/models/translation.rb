@@ -8,7 +8,7 @@ class Translation
   end
 
   class << self
-    def create(locale, key, value)
+    def save(locale, key, value)
       store[formatted_key(locale, key)] = value
     end
 
