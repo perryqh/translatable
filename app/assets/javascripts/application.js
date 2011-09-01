@@ -11,9 +11,11 @@
 //= require_tree .
 
 $(function() {
+
   $('.editable').inlineEdit({
     save: function(e, data) {
       return confirm('Change name to '+ data.value +'?');
     }
   });
 });
+
