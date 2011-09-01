@@ -34,6 +34,19 @@ describe TranslationsController do
     end
   end
 
+  describe "post create" do
+    before(:each) do
+      Translation.send(:store).flushdb
+    end
+
+    it "should create translation if valid" do
+      xhr :post, :create, :key => 'create.key', :value => 'value for you', :locale => 'ck-KK'
+
+      response.should be_success
+      Translation.locale_value('ck-KK', 'create.key').should == 'value for you'
+    end
+  end
+
   describe "put update" do
     before(:each) do
       Translation.send(:store).flushdb

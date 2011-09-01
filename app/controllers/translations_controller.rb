@@ -5,6 +5,12 @@ class TranslationsController < ApplicationController
 
   end
 
+  def create
+    Translation.save(locale, params[:key], params[:value])
+
+    render :nothing => true, :status => 200
+  end
+
   def update
     Translation.save(locale, params[:key], params[:value])
 

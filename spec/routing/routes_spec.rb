@@ -7,8 +7,12 @@ describe 'Routes' do
       {:get => '/translations'}.should route_to('translations#index')
     end
 
-    it "shiuld route to update" do
+    it "should route to update" do
       {:put => '/translations/x'}.should route_to('translations#update', :id => 'x')
+    end
+
+    it "should route to create" do
+      {:post => '/translations' }.should route_to('translations#create')
     end
   end
 end
