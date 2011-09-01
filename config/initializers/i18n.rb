@@ -1,1 +1,1 @@
-I18n.backend = I18n::Backend::KeyValue.new(Translation.send(:store))
+I18n.backend = Translator::Backend.new

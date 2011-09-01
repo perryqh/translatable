@@ -12,11 +12,6 @@ class Translation
       store[formatted_key(locale, key)] = value
     end
 
-    def reload!
-      store.flushdb
-      I18n.backend.load_translations
-    end
-
     def find(filter)
       locale = filter[:locale]
 
@@ -42,7 +37,7 @@ class Translation
 
     private
     def store
-      @store ||= Redis.new(:host => Settings.redis_host, :port => Settings.redis_port, :db => Settings.redis_db, :namespace => Settings.redis_namespace)
+      Translator.store
     end
     
     def formatted_key(locale, key)

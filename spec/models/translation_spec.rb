@@ -57,7 +57,7 @@ describe Translation do
       Translation.save('en-US', 'timmy', 'joe')
       Translation.available_keys('en-US').count.should == 1
 
-      Translation.reload!
+      Translator.reload!
       Translation.available_keys('en-US').should be_empty
     end
   end
