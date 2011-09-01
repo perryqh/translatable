@@ -1,13 +1,17 @@
 defaults: &defaults
-  redis_url: redis://localhost:23682/2/i18n
+  redis_port: 6379
+  redis_db: 10
+  redis_host: localhost
+  redis_namespace: i18n
 
 development:
   <<: *defaults
+  redis_db: 11
 
 test:
   <<: *defaults
-  redis_url: redis://localhost:23682/3/i18n
+  redis_db: 12
 
 production:
   <<: *defaults
-  redis_url: redis://localhost:23682/1/i18n
+  redis_db: 10

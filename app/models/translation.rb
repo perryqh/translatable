@@ -42,7 +42,7 @@ class Translation
 
     private
     def store
-      @store ||= Redis.new(:url => Settings.redis_url)
+      @store ||= Redis.new(:host => Settings.redis_host, :port => Settings.redis_port, :db => Settings.redis_db, :namespace => Settings.redis_namespace)
     end
     
     def formatted_key(locale, key)
