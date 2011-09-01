@@ -1,3 +1,14 @@
+%section.filter
+  = form_tag(translations_url, :method => :get) do
+    .input-section
+      %label{:for => :locale} Locale
+      = select_tag(:locale, options_for_select(Translation.locales, locale))
+    .input-section
+      %label{:for => :filter_by} Filter by
+      = text_field_tag(:filter_by, params[:filter_by])
+    .input-section
+      = submit_tag 'Filter'
+
 .grid-view
   %table.grid
     %tr
