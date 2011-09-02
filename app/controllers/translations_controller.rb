@@ -2,16 +2,17 @@ class TranslationsController < ApplicationController
   respond_to :html, :json
 
   def index
-
+    @translation ||= Translation.new(:locale => locale)
   end
 
   def create
-    translation = Translation.new(:locale => locale, :key => params[:key], :value => params[:value])
+    @translation = Translation.new(params[:translation])
 
-    if translation.save
-      render :nothing => true, :status => 200
+    if @translation.save
+      flash[:notice] = "Successfully created I18N Translation."
+      redirect_to translations_url
     else
-      render :nothing => true, :status => 500
+      render :action => :index
     end
   end
 

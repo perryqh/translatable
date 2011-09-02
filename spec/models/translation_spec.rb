@@ -27,7 +27,7 @@ describe Translation do
     end
 
     it "should require locale with min length of 2" do
-      @translation.errors[:locale].should =~ ["can't be blank", "is too short (minimum is 2 characters)"]
+      @translation.errors[:locale].should =~ ["is too short (minimum is 2 characters)"]
 
       @translation.locale = 'a'
       @translation.valid?
@@ -36,11 +36,11 @@ describe Translation do
     end
 
     it "sould require key with minimum length of 1" do
-      @translation.errors[:key].should =~ ["can't be blank", "is too short (minimum is 1 characters)"]
+      @translation.errors[:key].should =~ ["is too short (minimum is 1 characters)"]
 
       @translation.key = ''
       @translation.valid?
-      @translation.errors[:key].should =~ ["can't be blank", "is too short (minimum is 1 characters)"]
+      @translation.errors[:key].should =~ ["is too short (minimum is 1 characters)"]
     end
   end
 

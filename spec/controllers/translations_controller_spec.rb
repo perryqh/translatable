@@ -40,16 +40,16 @@ describe TranslationsController do
     end
 
     it "should create translation if valid" do
-      xhr :post, :create, :key => 'create.key', :value => 'value for you', :locale => 'ck-KK'
+      xhr :post, :create, :translation => {:key => 'create.key', :value => 'value for you', :locale => 'ck-KK'}
 
-      response.should be_success
+      response.should redirect_to(translations_url)
       Translation.locale_value('ck-KK', 'create.key').should == 'value for you'
     end
 
     it "should return 500 and not save if not valid" do
-      xhr :post, :create, :key => '', :value => 'value for you', :locale => 'ck-KK'
+      xhr :post, :create, :translation => {:key => '', :value => 'value for you', :locale => 'ck-KK'}
 
-      response.status.should == 500
+      response.should render_template :index
     end
   end
 

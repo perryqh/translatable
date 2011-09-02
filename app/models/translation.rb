@@ -3,13 +3,17 @@ class Translation
 
   attr_accessor :locale, :key, :value
 
-  validates :locale, :presence => true, :length => {:minimum => 2}
-  validates :key, :presence => true, :length => {:minimum => 1}
+  validates :locale, :length => {:minimum => 2}
+  validates :key, :length => {:minimum => 1}
 
   def initialize(attributes = {})
     attributes.each do |name, value|
       send("#{name}=", value)
     end
+  end
+
+  def to_key
+    [@key]
   end
 
   def value

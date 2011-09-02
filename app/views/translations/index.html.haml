@@ -10,15 +10,18 @@
       .input-section
         = submit_tag 'Filter'
   %section.create
-    = form_tag(translations_url, :method => :post) do
+    = form_for(@translation, :url => translations_url, :method => :post) do|f|
+      - unless @translation.errors.empty?
+        .errors= @translation.errors.full_messages.join('. ')
+      = f.hidden_field :locale
       .input-section
-        %label{:for => :key} Key
-        = text_field_tag(:key)
+        = f.label :key
+        = f.text_field :key
       .input-section
-        %label{:for => :value} Value
-        = text_field_tag(:value)
+        = f.label :value
+        = f.text_field :value
       .input-section
-        = submit_tag 'Create'
+        = f.submit 'Create'
 %section.grid-view
   %table.grid
     %tr
