@@ -9,7 +9,16 @@
         = text_field_tag(:filter_by, params[:filter_by])
       .input-section
         = submit_tag 'Filter'
-
+  %section.create
+    = form_tag(translations_url, :method => :post) do
+      .input-section
+        %label{:for => :key} Key
+        = text_field_tag(:key)
+      .input-section
+        %label{:for => :value} Value
+        = text_field_tag(:value)
+      .input-section
+        = submit_tag 'Create'
 %section.grid-view
   %table.grid
     %tr
