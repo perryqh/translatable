@@ -19,6 +19,8 @@ qa:
   redis_host: icefish.redistogo.com
   redis_port: 9390
   redis_un: redistogo
+  redis_db:
+  redis_namespace:
 
 production:
   <<: *defaults
