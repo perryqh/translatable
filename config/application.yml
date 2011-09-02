@@ -3,7 +3,7 @@ defaults: &defaults
   redis_db: 10
   redis_host: localhost
   redis_namespace: i18n
-  redis_url:
+  redis_pw:
 
 development:
   <<: *defaults
@@ -15,7 +15,10 @@ test:
 
 qa:
   <<: *defaults
-  redis_url: redis://redistogo:826e8d4875767d4d8dc8935fb35d9d21@icefish.redistogo.com:9390
+  redis_pw: 826e8d4875767d4d8dc8935fb35d9d21
+  redis_host: icefish.redistogo.com
+  redis_port: 9390
+  redis_un: redistogo
 
 production:
   <<: *defaults
