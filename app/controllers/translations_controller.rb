@@ -32,7 +32,7 @@ class TranslationsController < ApplicationController
   helper_method :locale, :translations
 
   def translations
-    Translation.find(:locale => locale)
+    Translation.find(:locale => locale, :filter_by => params[:filter_by])
   end
 
   def locale

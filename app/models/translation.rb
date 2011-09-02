@@ -44,10 +44,14 @@ class Translation
 
       return Translation.new(:locale => locale, :key => filter[:key], :value => locale_value(locale, filter[:key])) if filter[:key]
 
-      Translation.available_keys(locale).sort.collect{|key|
+      translations = Translation.available_keys(locale).sort.collect{|key|
         val = Translation.locale_value(locale, key)
         Translation.new(:locale => locale, :key => key, :value => val) if val
       }.compact
+
+      translations = translations.select { |tran| tran.key.include?(filter[:filter_by]) } if filter[:filter_by]
+
+      translations
     end
 
     def locales

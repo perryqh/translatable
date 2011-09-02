@@ -21,7 +21,7 @@ describe TranslationsController do
   describe "translations" do
     it "should find all of the translations by locale" do
       translations = [Translation.new]
-      Translation.should_receive(:find).with(:locale => 'en-US').and_return translations
+      Translation.should_receive(:find).with(:locale => 'en-US', :filter_by => nil).and_return translations
 
       @controller.send(:translations).should == translations
     end

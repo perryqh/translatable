@@ -97,6 +97,16 @@ describe Translation do
       Translation.find(:locale =>'en-US').last.key.should == 'timmy'
       Translation.find(:locale =>'en-US').last.value.should == 'toe'
     end
+
+    it "should filter_by" do
+      Translation.new(:locale => 'en-US', :key => 'nokey2', :value => 'bar').save
+      Translation.new(:locale => 'en-US', :key => 'baz', :value => '1').save
+      Translation.new(:locale => 'en-US', :key => 'bim.baz', :value => '2').save
+      Translation.new(:locale => 'en-US', :key => 'baz.bo', :value => '3').save
+      Translation.new(:locale => 'en-US', :key => 'nokey', :value => 'bar').save
+
+      Translation.find(:locale => 'en-US', :filter_by => 'baz').collect(&:value).should == ['1', '3', '2']
+    end
   end
 
   describe "reload!" do
