@@ -21,7 +21,7 @@ describe Translation do
 
   describe "validations" do
     before(:each) do
-      Translator.reload!
+      Translation.reload!
       @translation = Translation.new
       @translation.valid?
     end
@@ -105,7 +105,7 @@ describe Translation do
       Translation.new(:locale => 'en-US', :key => 'timmy', :value => 'joe').save
       Translation.available_keys('en-US').count.should == 1
 
-      Translator.reload!
+      Translation.reload!
       Translation.available_keys('en-US').should be_empty
     end
   end

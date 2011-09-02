@@ -19,7 +19,7 @@ class Translation
   def value
     unless @value.blank?
       if @value.first == "\""
-        val = @value[1..-1] 
+        val = @value[1..-1]
       else
         val = @value
       end
@@ -64,9 +64,14 @@ class Translation
       store[formatted_key(locale, key)]
     end
 
+    def reload!
+      store.flushdb
+      I18n.backend.load_translations
+    end
+
     private
     def store
-      Translator.store
+      @store ||= Redis.new(:host => Settings.redis_host, :port => Settings.redis_port, :db => Settings.redis_db, :namespace => Settings.redis_namespace)
     end
 
     def formatted_key(locale, key)
