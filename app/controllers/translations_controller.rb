@@ -6,15 +6,25 @@ class TranslationsController < ApplicationController
   end
 
   def create
-    Translation.save(locale, params[:key], params[:value])
+    translation = Translation.new(:locale => locale, :key => params[:key], :value => params[:value])
 
-    render :nothing => true, :status => 200
+    if translation.save
+      render :nothing => true, :status => 200
+    else
+      render :nothing => true, :status => 500
+    end
   end
 
   def update
-    Translation.save(locale, params[:key], params[:value])
+    translation = Translation.find(:locale => locale, :key => params[:key])
 
-    render :nothing => true, :status => 200
+    translation.value = params[:value]
+
+    if translation.save
+      render :nothing => true, :status => 200
+    else
+      render :nothing => true, :status => 500
+    end
   end
 
   private

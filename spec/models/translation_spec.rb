@@ -11,15 +11,55 @@ describe Translation do
     end
   end
 
+  describe "validations" do
+    before(:each) do
+      Translator.reload!
+      @translation = Translation.new
+      @translation.valid?
+    end
+
+    it "should require locale with min length of 2" do
+      @translation.errors[:locale].should =~ ["can't be blank", "is too short (minimum is 2 characters)"]
+
+      @translation.locale = 'a'
+      @translation.valid?
+
+      @translation.errors[:locale].should eql ["is too short (minimum is 2 characters)"]
+    end
+
+    it "sould require key with minimum length of 1" do
+      @translation.errors[:key].should =~ ["can't be blank", "is too short (minimum is 1 characters)"]
+
+      @translation.key = ''
+      @translation.valid?
+      @translation.errors[:key].should =~ ["can't be blank", "is too short (minimum is 1 characters)"]
+    end
+  end
+
+  describe "save" do
+    it "should save if valid" do
+      Translation.new(:locale => 'el', :key => 'loco', :value => 'bolo').save.should be_true
+      found = Translation.find(:locale => 'el', :key => 'loco')
+
+      found.key.should == 'loco'
+      found.value.should == 'bolo'
+      found.locale.should == 'el'
+    end
+
+    it "should not save if invalid" do
+      Translation.new(:locale => 'rio').save.should be_false
+    end
+  end
+
   describe "locales" do
     before(:each) do
-      Translation.save('en-US', 'jimmy', 'joe')
-      Translation.save('en-US', 'jimmy', 'jack')
-      Translation.save('xx-YY', 'jimmy', 'joe')
-      Translation.save('xx-YY', 'timmy', 'joe')
-      Translation.save('ss-SS', 'jimmy', 'joe')
-      Translation.save('aa-AA', 'jimmy', 'joe')
-      Translation.save('en-US', 'jimmy', 'joe')
+      Translation.new(:locale => 'en-US', :key => 'jimmy', :value => 'joe').save
+      Translation.new(:locale => 'en-US', :key => 'jimmy', :value => 'jack').save
+      Translation.new(:locale => 'xx-YY', :key => 'jimmy', :value => 'joe').save
+      Translation.new(:locale => 'xx-YY', :key => 'timmy', :value => 'joe').save
+      Translation.new(:locale => 'ss-SS', :key => 'jimmy', :value => 'joe').save
+      Translation.new(:locale => 'aa-AA', :key => 'jimmy', :value => 'joe').save
+      Translation.new(:locale => 'en-US', :key => 'jimmy', :value => 'joe').save
     end
 
     specify { Translation.locales.should == ['aa-AA', 'en-US', 'ss-SS', 'xx-YY']}
@@ -27,15 +67,15 @@ describe Translation do
 
   describe "create and read" do
     it "should create and read translation by locale" do
-      Translation.save('en-US', 'foo', 'bar')
+      Translation.new(:locale => 'en-US', :key => 'foo', :value => 'bar').save
       Translation.send(:store)['en-US.foo'].should == 'bar'
       Translation.locale_value('en-US', 'foo').should == 'bar'
       Translation.locale_value('es-ES', 'foo').should be_nil
     end
 
     it "should include all key values" do
-      Translation.save('en-US', 'jimmy', 'joe')
-      Translation.save('en-US', 'timmy', 'toe')
+      Translation.new(:locale => 'en-US', :key => 'jimmy', :value => 'joe').save
+      Translation.new(:locale => 'en-US', :key => 'timmy', :value => 'toe').save
 
       Translation.available_keys('en-US').include?('jimmy').should be_true
       Translation.available_keys('en-US').include?('timmy').should be_true
@@ -54,7 +94,7 @@ describe Translation do
   describe "reload!" do
     it "should flush and load the translations" do
       Translation.available_keys('en-US').should be_empty
-      Translation.save('en-US', 'timmy', 'joe')
+      Translation.new(:locale => 'en-US', :key => 'timmy', :value => 'joe').save
       Translation.available_keys('en-US').count.should == 1
 
       Translator.reload!

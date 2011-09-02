@@ -45,12 +45,18 @@ describe TranslationsController do
       response.should be_success
       Translation.locale_value('ck-KK', 'create.key').should == 'value for you'
     end
+
+    it "should return 500 and not save if not valid" do
+      xhr :post, :create, :key => '', :value => 'value for you', :locale => 'ck-KK'
+
+      response.status.should == 500
+    end
   end
 
   describe "put update" do
     before(:each) do
       Translation.send(:store).flushdb
-      Translation.save('en-US', 'error', 'big error!')
+      Translation.new(:locale => 'en-US', :key => 'error', :value => 'big error!').save
       Translation.locale_value('en-US', 'error').should == 'big error!'
     end
 
@@ -59,6 +65,12 @@ describe TranslationsController do
 
       response.should be_success
       Translation.locale_value('en-US', 'error').should == 'even bigger'
+    end
+
+    it "should return 500 and not save if key not found" do
+      xhr :put, :update, :id => 'xx', :key => '', :value => 'value for you', :locale => 'ck-KK'
+
+      response.status.should == 500
     end
   end
 end

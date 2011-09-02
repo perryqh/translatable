@@ -1,5 +1,10 @@
 class Translation
+  include ActiveModel::Validations
+
   attr_accessor :locale, :key, :value
+
+  validates :locale, :presence => true, :length => {:minimum => 2}
+  validates :key, :presence => true, :length => {:minimum => 1}
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -7,13 +12,20 @@ class Translation
     end
   end
 
-  class << self
-    def save(locale, key, value)
-      store[formatted_key(locale, key)] = value
+  def save
+    if valid?
+      Translation.send(:save, locale, key, value)
+      true
+    else
+      false
     end
+  end
 
+  class << self
     def find(filter)
       locale = filter[:locale]
+
+      return Translation.new(:locale => locale, :key => filter[:key], :value => locale_value(locale, filter[:key])) if filter[:key]
 
       Translation.available_keys(locale).sort.collect{|key|
         val = Translation.locale_value(locale, key)
@@ -39,9 +51,13 @@ class Translation
     def store
       Translator.store
     end
-    
+
     def formatted_key(locale, key)
       "#{locale}.#{key}"
+    end
+
+    def save(locale, key, value)
+      store[formatted_key(locale, key)] = value
     end
   end
 end

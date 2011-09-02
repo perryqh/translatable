@@ -1,1 +1,0 @@
-I18n.backend = Translator::Backend.new
