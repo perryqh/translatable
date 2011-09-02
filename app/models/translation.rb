@@ -75,15 +75,19 @@ class Translation
 
     private
     def store
-      @store ||= Redis.new(:host => Settings.redis_host, :port => Settings.redis_port, :db => Settings.redis_db, :namespace => Settings.redis_namespace)
-    end
-
-    def formatted_key(locale, key)
-      "#{locale}.#{key}"
-    end
-
-    def save(locale, key, value)
-      store[formatted_key(locale, key)] = value
+      @store ||= if Settings.redis_url.blank?
+      Redis.new(:host => Settings.redis_host, :port => Settings.redis_port, :db => Settings.redis_db, :namespace => Settings.redis_namespace)
+    else
+      Redis.new(:url => Settings.redis_url)
     end
   end
+
+  def formatted_key(locale, key)
+    "#{locale}.#{key}"
+  end
+
+  def save(locale, key, value)
+    store[formatted_key(locale, key)] = value
+  end
+end
 end
