@@ -11,6 +11,14 @@ describe Translation do
     end
   end
 
+  describe "value getter" do
+    it "should remove surrounding double quotes" do
+      Translation.new(:value => "\"value\"").value.should == 'value'
+      Translation.new(:value => "value\"").value.should == 'value'
+      Translation.new(:value => "\"value").value.should == 'value'
+    end
+  end
+
   describe "validations" do
     before(:each) do
       Translator.reload!

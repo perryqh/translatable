@@ -12,6 +12,19 @@ class Translation
     end
   end
 
+  def value
+    unless @value.blank?
+      if @value.first == "\""
+        val = @value[1..-1] 
+      else
+        val = @value
+      end
+      val = val[0..-2] if val.last == "\""
+    end
+
+    val || @value
+  end
+
   def save
     if valid?
       Translation.send(:save, locale, key, value)
