@@ -9,7 +9,6 @@ tmp/**/*
 #*
 *#
 tmtags
-config/database.yml
 public/uploads/**/*
 .sass-cache/
 public/assets/
