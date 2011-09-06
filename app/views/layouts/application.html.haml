@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Translatable
+    %title translatable
     /[if lt IE 8]
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
@@ -16,8 +16,6 @@
           %h3
             = link_to "translatable", root_url
           %ul.nav
-            %li
-              = link_to "New", "#"
           = form_tag translations_url, :method => :get do
             = text_field_tag :filter_by, params[:filter_by], :placeholder => "filter"
           %ul.nav.secondary-nav
