@@ -12,4 +12,16 @@ describe "Translations" do
       page.should have_content("Value")
     end
   end
+
+  describe "create translation" do
+    it "should create valid translation" do
+      visit translations_url
+      fill_in 'Key', :with => 'trankey'
+      fill_in 'Value', :with => 'tranvalue'
+      click_button 'Create'
+
+      page.should have_content 'trankey'
+      page.should have_content 'tranvalue'
+    end
+  end
 end

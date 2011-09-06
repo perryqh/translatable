@@ -25,10 +25,13 @@
 %section.grid-view
   %table.grid
     %tr
+      %th.delete
       %th.key I18n Key
       %th.value Value
       - for translation in translations
         %tr.row
+          %td
+            = link_to(image_tag('trash_can1.png'), '#', 'data-key' => translation.key, 'data-url' => translation_url('x'), :class => 'destroy-translation')
           %td.key= translation.key
           %td.value
             %span.editable{'data-key' => translation.key, 'data-url' => translation_url('x')}= translation.value

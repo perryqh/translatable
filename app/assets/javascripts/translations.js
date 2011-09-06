@@ -2,7 +2,29 @@ $(function() {
   $(document).ready(function() {
     $('.editable').editable();
     $('select#locale').observeLocale();
+    $('a.destroy-translation').destroyTranslation();
   });
+
+  $.fn.destroyTranslation = function() {
+    $(this).click(function() {
+      var parentRow = $(this).parents('tr.row');
+      var ajaxOptions = {
+        type: 'delete',
+        url: $(this).attr('data-url'),
+        data: { key: $(this).attr('data-key')},
+        success: function(response) {
+          parentRow.slideUp();
+        }
+      };
+      $.ajax(ajaxOptions);
+      return false;
+    });
+
+    $(this).confirm({
+      msg: 'Are you sure you want to delete this translation?',
+      timeout: 10000
+    });
+  };
 
   $.fn.editable = function() {
     $(this).inlineEdit({
