@@ -12,6 +12,10 @@ class Translation
     end
   end
 
+  def destroy
+    Translation.send(:destroy, locale, key)
+  end
+
   def to_key
     [@key]
   end
@@ -42,16 +46,23 @@ class Translation
     def find(filter)
       locale = filter[:locale]
 
-      return Translation.new(:locale => locale, :key => filter[:key], :value => locale_value(locale, filter[:key])) if filter[:key]
+      if filter[:key]
+        return Translation.new(:locale => locale, :key => filter[:key], :value => locale_value(locale, filter[:key])) if store.exists(formatted_key(locale, filter[:key]))
 
-      translations = Translation.available_keys(locale).sort.collect{|key|
-        val = Translation.locale_value(locale, key)
-        Translation.new(:locale => locale, :key => key, :value => val) if val
-      }.compact
+      else
+        translations = Translation.available_keys(locale).sort.collect{|key|
+          val = Translation.locale_value(locale, key)
+          Translation.new(:locale => locale, :key => key, :value => val) if val
+        }.compact
 
-      translations = translations.select { |tran| tran.key.include?(filter[:filter_by]) } if filter[:filter_by]
+        translations = translations.select { |tran| tran.key.include?(filter[:filter_by]) } if filter[:filter_by]
 
-      translations
+        translations
+      end
+    end
+
+    def destroy(locale, key)
+      store.del(locale, formatted_key(locale, key))
     end
 
     def locales

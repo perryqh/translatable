@@ -53,6 +53,20 @@ describe TranslationsController do
     end
   end
 
+  describe "delete destroy" do
+    before(:each) do
+      Translation.send(:store).flushdb
+      Translation.new(:locale => 'en-US', :key => 'todelete', :value => 'useless!').save
+    end
+
+    it "should destroy translation" do
+      xhr :delete, :destroy, :id => 'foo', :locale => 'en-US', :key => 'todelete'
+
+      response.status.should == 200
+      Translation.find(:locale => 'en-US', :key => 'todelete').should be_nil
+    end
+  end
+
   describe "put update" do
     before(:each) do
       Translation.send(:store).flushdb

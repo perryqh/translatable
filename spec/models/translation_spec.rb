@@ -44,6 +44,21 @@ describe Translation do
     end
   end
 
+  describe "destroy" do
+    before(:each) do
+      @translation = Translation.new(:locale => 'el', :key => 'loco', :value => 'bolo')
+      @translation.save.should be_true
+
+      Translation.find(:locale => 'el', :key => 'loco').should_not be_nil
+    end
+
+    it "should destroy translation" do
+      @translation.destroy
+      
+      Translation.find(:locale => 'el', :key => 'loco').should be_nil
+    end
+  end
+
   describe "save" do
     it "should save if valid" do
       Translation.new(:locale => 'el', :key => 'loco', :value => 'bolo').save.should be_true
