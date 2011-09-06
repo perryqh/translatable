@@ -14,5 +14,9 @@ describe 'Routes' do
     it "should route to create" do
       {:post => '/translations' }.should route_to('translations#create')
     end
+
+    it "should route to destroy" do
+      {:delete => '/translations/x' }.should route_to('translations#destroy', :id => 'x')
+    end
   end
 end
