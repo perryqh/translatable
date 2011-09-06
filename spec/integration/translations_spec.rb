@@ -2,8 +2,7 @@ describe "Translations" do
   describe "GET /" do
     it "displays i18n locale filtering" do
       visit translations_url
-      page.should have_content("Locale")
-      page.should have_content("Filter by")
+      page.should have_content("Locales")
     end
 
     it "displays key/value grid" do
