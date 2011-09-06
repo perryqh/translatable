@@ -1,35 +1,38 @@
-= content_for(:header_right) do
-  %section.filter
-    = form_tag(translations_url, :method => :get) do
-      .input-section
-        %label{:for => :locale} Locale
-        = select_tag(:locale, options_for_select(Translation.locales, locale))
-      .input-section
-        %label{:for => :filter_by} Filter by
-        = text_field_tag(:filter_by, params[:filter_by])
-      .input-section
-        = submit_tag 'Filter'
-  %section.create
-    = form_for(@translation, :url => translations_url, :method => :post) do|f|
-      - unless @translation.errors.empty?
-        .errors= @translation.errors.full_messages.join('. ')
+%section.create
+  = form_for(@translation, :url => translations_url, :method => :post) do|f|
+    %fieldset
+      %legend
+        = "Create new #{locale} translation key"
+
+      .clearfix
+        - unless @translation.errors.empty?
+          .alert-message.error
+            = @translation.errors.full_messages.join('. ')
+
       = f.hidden_field :locale
-      .input-section
+
+      .clearfix
         = f.label :key
-        = f.text_field :key
-      .input-section
+        .input
+          = f.text_field :key
+
+      .clearfix
         = f.label :value
-        = f.text_field :value
-      .input-section
-        = f.submit 'Create'
-%section.grid-view
-  %table.grid
-    %tr
-      %th.delete
-      %th.key I18n Key
-      %th.value Value
+        .input
+          = f.text_field :value
+
+      .actions
+        = f.submit 'Create', :class => "btn primary"
+%section
+  %table#translations.zebra-striped
+    %thead
+      %tr
+        %th.delete
+        %th.key I18n Key
+        %th.value Value
+    %tbody
       - for translation in translations
-        %tr.row
+        %tr
           %td
             = link_to(image_tag('trash_can1.png'), '#', 'data-key' => translation.key, 'data-url' => translation_url('x'), :class => 'destroy-translation')
           %td.key= translation.key

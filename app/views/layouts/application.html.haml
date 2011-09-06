@@ -1,12 +1,8 @@
 !!!
 %html
   %head
-    %title Translatable
-
-    = stylesheet_link_tag '/stylesheets/blueprint/screen', :media => 'screen, projection'
-    = stylesheet_link_tag '/stylesheets/blueprint/print', :media => 'print'
+    %title translatable
     /[if lt IE 8]
-      = stylesheet_link_tag "/stylesheets/blueprint/ie.css", :media => "screen, projection"
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -14,9 +10,23 @@
     %link{:rel => "Shortcut Icon", :type => "image/ico", :href => asset_path("favicon.png")}
 
   %body
-    %header
-      #logo
+    .topbar
+      .topbar-inner
+        .container
+          %h3
+            = link_to "translatable", root_url
+          %ul.nav
+          = form_tag translations_url, :method => :get do
+            = text_field_tag :filter_by, params[:filter_by], :placeholder => "filter"
+          %ul.nav.secondary-nav
+            %li.dropdown
+              = link_to "Locales", "#", :class => "dropdown-toggle"
+              %ul.dropdown-menu
+                - Translation.locales.each do |locale|
+                  = content_tag :li, link_to(locale, translations_url(:filter_by => params[:filter_by], :locale=> locale)), :class => (params[:locale] == locale ? 'active' : nil)
+
+    .container
       = yield(:header_right)
-    %section#content= yield
+      %section#content= yield
 
     %footer
