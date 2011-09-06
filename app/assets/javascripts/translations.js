@@ -7,7 +7,7 @@ $(function() {
 
   $.fn.destroyTranslation = function() {
     $(this).click(function() {
-      var parentRow = $(this).parents('tr.row');
+      var parentRow = $(this).parents('tr');
       var ajaxOptions = {
         type: 'delete',
         url: $(this).attr('data-url'),
@@ -51,12 +51,12 @@ $(function() {
   }
 
   $("body").bind("click", function (e) {
-  $('.dropdown-toggle, .menu').parent("li").removeClass("open");
+    $('.dropdown-toggle, .menu').parent("li").removeClass("open");
   });
   $(".dropdown-toggle, .menu").click(function (e) {
     var $li = $(this).parent("li").toggleClass('open');
     return false;
   });
 
-$("#translations").tablesorter( {sortList: [[1,0]]} );
+  $("#translations").tablesorter( {sortList: [[1,0]]} );
 });

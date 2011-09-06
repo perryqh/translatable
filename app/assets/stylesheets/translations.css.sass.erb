@@ -1,0 +1,46 @@
+header
+  width: 960px
+  min-height: 77px
+  margin: 15px 0px 0 30px
+
+  #logo
+    background: url(<%= asset_path 'logo.png' %>) no-repeat 0 0  
+    height: 71px
+    width: 170px
+    display: inline-block  
+
+#content
+  margin: 0 30px 0 30px
+
+section.filter, section.create
+  padding: 15px
+  display: inline-block
+  margin: 0 0 0 50px
+  vertical-align: top
+
+  label, input, select
+    font-size: 14px
+    width: 75px
+
+  label
+    display: block
+    color: #004983
+  .input-section
+    display: inline-block
+    margin-right: 15px
+
+section.create
+  margin: 0
+  border: 1px solid #004983
+
+section.grid-view
+  margin-top: 20px
+  th
+    font-size: 16px
+
+.errors, section.create .field_with_errors label
+  color: red
+
+th.delete
+  width: 25px
+  
