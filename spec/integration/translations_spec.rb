@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe "Translations" do
   before(:each) do
     Translation.send(:store).flushdb
