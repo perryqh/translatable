@@ -19,13 +19,13 @@ end
 # the root of the application.
 
 set :keep_releases,       5
-set :application,         "i18ngui"
+set :application,         "translatable"
 set :user,                "g5search"
 set :password,            EY_PASSWORD
 set :deploy_to,           "/data/#{application}"
-set :monit_group,         "i18ngui"
+set :monit_group,         "translatable"
 set :runner,              "g5search"
-set :repository,          "git@g5search.unfuddle.com:g5search/i18ngui.git"
+set :repository,          "git@github.com:perry3819/translatable.git"
 set :scm,                 :git
 set :scm_username,        SCM_USERNAME
 set :scm_password,        SCM_PASSWORD
