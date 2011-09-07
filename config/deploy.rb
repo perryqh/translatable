@@ -2,7 +2,6 @@
 # http://www.engineyard.com/support/guides/deploying_your_application_with_capistrano
 
 require "eycap/recipes"
-require "config/developers/logins" if File.exist?("config/developers/logins.rb")
 
 # Servers
 DEMO    = "72.46.233.145:7000"
@@ -24,7 +23,7 @@ JOBS    = "72.46.233.109:7001"
 set :keep_releases,       5
 set :application,         "translatable"
 set :user,                "g5search"
-set :password,            EY_PASSWORD
+set :password,            ENV['EY_PASSWORD']
 set :deploy_to,           "/data/#{application}"
 set :monit_group,         "translatable"
 set :runner,              "g5search"
