@@ -36,12 +36,12 @@ describe "Translations" do
       page.should have_css("tr[data-key=#{@key}]")
     end
 
-    # it "updates the translation's value", :js => true do
-    #   within(:css, "tr[data-key=#{@key}]") {
-    #     fill_in '', :with => 'baz'
-    #     click_button 'Save'
-    #   }
-    # end
+    it "updates the translation's value", :js => true do
+      within(:css, "tr[data-key=#{@key}]") {
+        fill_in '', :with => 'baz'
+        click_button 'Save'
+      }
+    end
   end
 
   describe "create translation" do
