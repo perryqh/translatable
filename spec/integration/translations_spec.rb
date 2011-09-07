@@ -27,6 +27,23 @@ describe "Translations" do
     end
   end
 
+  describe "update translation" do
+    before(:each) do
+      @key = "foo"
+      @locale = 'en-US'
+      Translation.new(:locale => @locale, :key => @key, :value => 'bar').save
+      visit translations_url(:locale => @locale)
+      page.should have_css("tr[data-key=#{@key}]")
+    end
+
+    # it "updates the translation's value", :js => true do
+    #   within(:css, "tr[data-key=#{@key}]") {
+    #     fill_in '', :with => 'baz'
+    #     click_button 'Save'
+    #   }
+    # end
+  end
+
   describe "create translation" do
     it "should create valid translation" do
       visit translations_url
