@@ -1,7 +1,13 @@
 require 'spec_helper'
 
 describe "Translations" do
+  def set_host (host)
+    host! host
+    Capybara.app_host = "http://" + host
+  end
+
   before(:each) do
+    set_host "localhost:8080"
     Translation.send(:store).flushdb
   end
 
@@ -40,8 +46,15 @@ describe "Translations" do
 
     it "updates the translation's value", :js => true do
       within(:css, "tr[data-key=#{@key}]") {
-        fill_in '', :with => 'baz'
-        click_button 'Save'
+        find('span.editable').click
+        find('input[type=text]').set('baz')
+        find('button.save').click
+      }
+      visit translations_url(:locale => @locale)
+
+      within(:css, "tbody tr[data-key=#{@key}]") {
+        find('td.key').text.should == @key
+        find('td.value span.editable').text.should == 'baz'
       }
     end
   end

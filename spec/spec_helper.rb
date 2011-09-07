@@ -14,4 +14,7 @@ Spork.prefork do
   RSpec.configure do |config|
     config.mock_with :rspec
   end
+
+  Capybara.javascript_driver = :webkit
+  
 end

@@ -7,11 +7,11 @@ $(function() {
 
   $.fn.destroyTranslation = function() {
     $(this).click(function() {
-      var parentRow = $(this).parents('tr');
+      var parentRow = $(this).parents('tr[data-key]');
       var ajaxOptions = {
         type: 'delete',
-        url: $(this).parents('tr[data-url]').attr('data-url'),
-        data: { key: $(this).parents('tr[data-key]').attr('data-key')},
+        url: parentRow.attr('data-url'),
+        data: { key: parentRow.attr('data-key')},
         success: function(response) {
           parentRow.slideUp();
         }

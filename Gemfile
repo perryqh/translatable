@@ -7,7 +7,7 @@ gem 'settingslogic',  '~> 2.0.6'
 gem 'redis',          '~> 2.2.2'
 gem 'redis-store',    '~> 1.0.0.rc1'
 gem 'thin',           '~> 1.2.11', :group => [:qa]
-gem 'unicorn',        '~> 4.1.1', :group => [:development, :staging, :production]
+gem 'unicorn',        '~> 4.1.1',  :group => [:development, :staging, :production]
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -34,6 +34,5 @@ group :test do
   gem 'rb-fsevent',               '>= 0.4.3'
   gem 'growl',                    '>= 1.0.3'
   gem "spork",                    '>= 0.9.0.rc9'
-  gem "database_cleaner",         '>= 0.6.7'
-  gem 'capybara',                 '>= 1.1.1'
+  gem 'capybara-webkit',          '>= 0.6.1'
 end
