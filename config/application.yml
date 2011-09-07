@@ -15,7 +15,7 @@ test:
 
 qa:
   <<: *defaults
-  redis_pw: 826e8d4875767d4d8dc8935fb35d9d21
+  redis_pw: bc90b6e78f7ee2a2039551f52a044dfd
   redis_host: icefish.redistogo.com
   redis_port: 9390
   redis_un: redistogo
