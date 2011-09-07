@@ -10,8 +10,8 @@ $(function() {
       var parentRow = $(this).parents('tr');
       var ajaxOptions = {
         type: 'delete',
-        url: $(this).attr('data-url'),
-        data: { key: $(this).attr('data-key')},
+        url: $(this).parents('tr[data-url]').attr('data-url'),
+        data: { key: $(this).parents('tr[data-key]').attr('data-key')},
         success: function(response) {
           parentRow.slideUp();
         }
@@ -31,8 +31,8 @@ $(function() {
       save: function(e, data) {
         var ajaxOptions = {
           type: 'post',
-          url: $(this).attr('data-url'),
-          data: { '_method': 'put', key: $(this).attr('data-key'), value: data.value },
+          url: $(this).parents('tr[data-url]').attr('data-url'),
+          data: { '_method': 'put', key: $(this).parents('tr[data-key]').attr('data-key'), value: data.value },
           success: function(response) {
 
           }
