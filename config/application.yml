@@ -22,6 +22,10 @@ qa:
   redis_db:
   redis_namespace:
 
+staging:
+  <<: *defaults
+  redis_db: 13
+
 production:
   <<: *defaults
   redis_db: 10
