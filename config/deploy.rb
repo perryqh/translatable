@@ -66,13 +66,13 @@ end
 task :production do
   role :web, UTIL1 # merb_background [mongrel] [], call_player [mongrel] [], api [mongrel] [], gts [mongrel] [], jobs [mongrel] []
   role :app, UTIL1, :mongrel => true
-  role :db , "72.46.233.151:7004", :primary => true
   set :rails_env, "production"
 end
 
 task :staging do
   role :web, STAGING
   role :app, STAGING, :mongrel => true,
+  set :rails_env, "staging"
 end
 
 # Do not change below unless you know what you are doing!
