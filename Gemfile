@@ -8,6 +8,7 @@ gem 'redis',          '~> 2.2.2'
 gem 'redis-store',    '~> 1.0.0.rc1'
 gem 'thin',           '~> 1.2.11'
 
+gem 'pg'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
