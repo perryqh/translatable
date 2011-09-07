@@ -71,7 +71,7 @@ end
 
 task :staging do
   role :web, STAGING
-  role :app, STAGING, :mongrel => true,
+  role :app, STAGING, :mongrel => true
   set :rails_env, "staging"
 end
 
