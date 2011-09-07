@@ -2,14 +2,17 @@
 # http://www.engineyard.com/support/guides/deploying_your_application_with_capistrano
 
 require "eycap/recipes"
+require "config/developers/logins" if File.exist?("config/developers/logins.rb")
 
-begin
-  require "config/developers/logins"
-rescue LoadError=>e
-  EY_PASSWORD=proc{Capistrano::CLI.password_prompt('g5search user password:')}
-  SCM_USERNAME="g5search"
-  SCM_PASSWORD=proc{Capistrano::CLI.password_prompt('git g5search password:')}
-end
+# Servers
+DEMO    = "72.46.233.145:7000"
+STAGING = "72.46.233.146:7000"
+PROD1   = "72.46.233.151:7002"
+PROD2   = "72.46.233.151:7003"
+UTIL1   = "72.46.233.151:7004"
+API     = "72.46.233.109:7000"
+URANUS  = "66.39.184.38"
+JOBS    = "72.46.233.109:7001"
 
 # =================================================================================================
 # ENGINE YARD REQUIRED VARIABLES
@@ -27,14 +30,31 @@ set :monit_group,         "translatable"
 set :runner,              "g5search"
 set :repository,          "git@github.com:perry3819/translatable.git"
 set :scm,                 :git
-set :scm_username,        SCM_USERNAME
-set :scm_password,        SCM_PASSWORD
+set :staging_host_name,     "real-staging.g5search.com"
+
 
 # This will execute the Git revision parsing on the *remote* server rather than locally
 set :real_revision,       lambda { source.query_revision(revision) { |cmd| capture(cmd) } }
 
 # comment out if it gives you trouble. newest net/ssh needs this set.
 ssh_options[:paranoid] = false
+
+before :deploy, :set_branch
+before 'deploy:long', :set_branch
+
+# comment out if it gives you trouble. newest net/ssh needs this set.
+ssh_options[:paranoid] = false
+
+task :set_branch do
+  unless exists? :branch
+    default_tag = fetch(:default_branch) if exists? :default_branch
+    default_tag ||= `git tag`.split("\n").last
+    tag = Capistrano::CLI.ui.ask "(Tag|Branch|Commit) to deploy [#{default_tag}]: "
+    tag = default_tag if tag.empty?
+    set( :branch, tag )
+    set( :newrelic_revision, tag ) if tag[0,1] == 'v'
+  end
+end
 
 # =================================================================================================
 # ROLES
@@ -45,24 +65,18 @@ ssh_options[:paranoid] = false
 # particular role, like :primary => true.
 
 task :production do
-  role :web, "72.46.233.151:7004" # merb_background [mongrel] [], call_player [mongrel] [], api [mongrel] [], gts [mongrel] [], jobs [mongrel] []
-  role :app, "72.46.233.151:7004", :mongrel => true
+  role :web, UTIL1 # merb_background [mongrel] [], call_player [mongrel] [], api [mongrel] [], gts [mongrel] [], jobs [mongrel] []
+  role :app, UTIL1, :mongrel => true
   role :db , "72.46.233.151:7004", :primary => true
   set :rails_env, "production"
-  set :environment_database, defer { production_database }
-  set :environment_dbhost, defer { production_dbhost }
 end
+
 task :staging do
-  role :web, "72.46.233.145:7000" # g5searchmarketing [mongrel] [g5search-db-master], merb_background [mongrel] [], call_player [mongrel] [], api [mongrel] [], gts [mongrel] [], jobs [mongrel] []
-  role :app, "72.46.233.145:7000", :mongrel => true
-  role :db , "72.46.233.145:7000", :primary => true
-  set :rails_env, "staging"
-  set :environment_database, defer { staging_database }
-  set :environment_dbhost, defer { staging_dbhost }
+  role :web, STAGING
+  role :app, STAGING, :mongrel => true,
 end
 
 # Do not change below unless you know what you are doing!
 after "deploy", "deploy:cleanup"
-after "deploy:migrations" , "deploy:cleanup"
 # uncomment the following to have a database backup done before every migration
 # before "deploy:migrate", "db:dump"
