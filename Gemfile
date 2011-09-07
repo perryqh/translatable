@@ -19,8 +19,10 @@ end
 
 gem 'jquery-rails',   "~> 1.0.13"
 
-gem 'capistrano',     "~> 2.8.0"
-gem 'eycap',         "~> 0.5.20"
+group :development do
+  gem 'capistrano',     "~> 2.8.0"
+  gem 'eycap',         "~> 0.5.20"
+end
 
 # To use debugger
 #gem 'ruby-debug19', :require => 'ruby-debug'
