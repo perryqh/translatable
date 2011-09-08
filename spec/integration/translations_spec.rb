@@ -7,7 +7,7 @@ describe "Translations" do
   end
 
   before(:each) do
-    set_host "localhost:8080"
+    set_host "translatable-qa.herokuapp.com"
     Translation.send(:store).flushdb
   end
 
