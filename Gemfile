@@ -8,6 +8,7 @@ gem 'redis',          '~> 2.2.2'
 gem 'redis-store',    '~> 1.0.0.rc1'
 gem 'thin',           '~> 1.2.11'
 gem 'unicorn',        '~> 4.1.1'
+gem 'eycap',          "~> 0.5.20"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -21,7 +22,6 @@ gem 'jquery-rails',   "~> 1.0.13"
 
 group :development do
   gem 'capistrano',     "~> 2.8.0"
-  gem 'eycap',          "~> 0.5.20"
   #gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
