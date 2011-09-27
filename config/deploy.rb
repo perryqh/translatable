@@ -2,6 +2,7 @@
 # http://www.engineyard.com/support/guides/deploying_your_application_with_capistrano
 
 require "eycap/recipes"
+require "bundler/capistrano"
 
 # Servers
 DEMO    = "72.46.233.145:7000"
