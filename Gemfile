@@ -22,7 +22,7 @@ gem 'jquery-rails',   "~> 1.0.13"
 group :development do
   gem 'capistrano',     "~> 2.8.0"
   gem 'eycap',          "~> 0.5.20"
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  #gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
 group :test do

@@ -1,1 +1,1 @@
-rvm use --create 1.9.2@translatable
+rvm use --create ree@translatable
