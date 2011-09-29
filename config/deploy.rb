@@ -3,7 +3,6 @@
 
 require "eycap/recipes"
 require "bundler/capistrano"
-load 'deploy/assets'
 
 # Servers
 DEMO    = "72.46.233.145:7000"
@@ -57,6 +56,12 @@ task :set_branch do
   end
 end
 
+desc "precompile the assets"
+task :precompile_assets, :roles => :web, :except => { :no_release => true } do
+  run "cd #{current_path}; rm -rf public/assets/*"
+  run "cd #{current_path}; RAILS_ENV=production bundle exec rake assets:precompile"
+end
+
 # =================================================================================================
 # ROLES
 # =================================================================================================
@@ -76,6 +81,8 @@ task :staging do
   role :app, STAGING, :mongrel => true
   set :rails_env, "staging"
 end
+
+after :deploy, :precompile_assets
 
 # Do not change below unless you know what you are doing!
 after "deploy", "deploy:cleanup"
