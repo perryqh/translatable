@@ -10,6 +10,8 @@ gem 'thin',           '~> 1.2.11'
 gem 'unicorn',        '~> 4.1.1'
 gem 'eycap',          "~> 0.5.20"
 
+gem 'therubyracer',   '~> 0.9.4', :groups => [:staging, :production]
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
