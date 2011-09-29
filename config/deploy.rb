@@ -3,6 +3,7 @@
 
 require "eycap/recipes"
 require "bundler/capistrano"
+load 'deploy/assets'
 
 # Servers
 DEMO    = "72.46.233.145:7000"
