@@ -34,7 +34,7 @@
       - for translation in translations
         %tr{'data-key' => translation.key, 'data-url' => translation_url('x')}
           %td
-            = link_to(image_tag('trash_can1.png'), '#', :class => 'destroy-translation')
+            = link_to(image_tag('/assets/trash_can1.png'), '#', :class => 'destroy-translation')
           %td.key= translation.key
           %td.value
             %span.editable= translation.value
