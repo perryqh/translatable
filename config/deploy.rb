@@ -56,7 +56,7 @@ task :set_branch do
   end
 end
 
-after 'deploy:update_code' do
+task :pipeline_precompile do
   run "cd #{current_path}; rm -rf public/assets/*"
   run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
 end
@@ -80,6 +80,8 @@ task :staging do
   role :app, STAGING, :mongrel => true
   set :rails_env, "staging"
 end
+
+after "deploy:update_code", "pipeline_precompile"
 
 # Do not change below unless you know what you are doing!
 after "deploy", "deploy:cleanup"
