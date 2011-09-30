@@ -58,7 +58,7 @@ end
 
 after 'deploy:update_code' do
   run "cd #{current_path}; rm -rf public/assets/*"
-  run "cd #{current_path}; RAILS_ENV=production bundle exec rake assets:precompile"
+  run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
 end
 
 # =================================================================================================
