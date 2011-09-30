@@ -26,6 +26,10 @@ staging:
   <<: *defaults
   redis_db: 13
 
+demo:
+  <<: *defaults
+  redis_db: 10
+  
 production:
   <<: *defaults
   redis_db: 10
