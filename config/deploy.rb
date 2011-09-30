@@ -81,7 +81,7 @@ task :staging do
   set :rails_env, "staging"
 end
 
-after "deploy:update_code", "pipeline_precompile"
+#after "deploy:update_code", "pipeline_precompile"
 
 # Do not change below unless you know what you are doing!
 after "deploy", "deploy:cleanup"

@@ -11,6 +11,5 @@ tmp/**/*
 tmtags
 public/uploads/**/*
 .sass-cache/
-public/assets/
 uploads/*
 config/developers/*
