@@ -22,14 +22,19 @@ qa:
   redis_db:
   redis_namespace:
 
+# demo runs in 'staging' environment so staging, demo, and production all point at same redis server
 staging:
   <<: *defaults
-  redis_db: 13
+  redis_db: 6
+  #redis_host: utilip, but can't commit to public github
 
+# same as production so that the webdevs can use translatable.g5search.com for both production and demo translations
 demo:
   <<: *defaults
-  redis_db: 10
-  
-production:
+  redis_db: 6
+  #redis_host: utilip, but can't commit to public github
+
+production: 
   <<: *defaults
-  redis_db: 10
+  redis_db: 6
+
