@@ -1,1 +1,1 @@
-rvm use --create ree@translatable
+rvm use --create ree-1.8.7-2011.12@translatable
