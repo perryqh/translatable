@@ -9,7 +9,7 @@ gem 'redis-store',    '~> 1.0.0.rc1'
 gem "SystemTimer",    "~> 1.2"
 gem 'thin',           '~> 1.2.11'
 gem 'unicorn',        '~> 4.1.1'
-gem 'eycap',          "~> 0.5.20"
+gem 'eycap',          ">= 0.5.22"
 
 gem 'therubyracer',   '~> 0.9.4', :groups => [:staging, :production]
 

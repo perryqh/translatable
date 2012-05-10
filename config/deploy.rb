@@ -28,7 +28,7 @@ set :password,            ENV['EY_PASSWORD']
 set :deploy_to,           "/data/#{application}"
 set :monit_group,         "translatable"
 set :runner,              "g5search"
-set :repository,          "git@github.com:perryqh/translatable.git"
+set :repository,          "git@github.com:g5search/translatable.git"
 set :scm,                 :git
 set :staging_host_name,     "real-staging.g5search.com"
 
