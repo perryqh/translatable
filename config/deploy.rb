@@ -83,6 +83,12 @@ task :staging do
   set :rails_env, "staging"
 end
 
+task :demo do
+  role :web, DEMO
+  role :app, DEMO, :mongrel => true
+  set :rails_env, "demo"
+end
+
 #after "deploy:update_code", "pipeline_precompile"
 
 # Do not change below unless you know what you are doing!
