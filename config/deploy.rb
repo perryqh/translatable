@@ -24,7 +24,7 @@ JOBS    = "72.46.233.109:7001"
 set :keep_releases,       5
 set :application,         "translatable"
 set :user,                "g5search"
-set :password,            ENV['EY_PASSWORD']
+set :password,            EY_PASSWORD
 set :deploy_to,           "/data/#{application}"
 set :monit_group,         "translatable"
 set :runner,              "g5search"
