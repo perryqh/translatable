@@ -3,6 +3,8 @@
 
 require "eycap/recipes"
 require "bundler/capistrano"
+require "config/developers/logins" if File.exist?("config/developers/logins.rb")
+
 
 # Servers
 DEMO    = "72.46.233.145:7000"
