@@ -23,7 +23,7 @@ JOBS    = "72.46.233.109:7001"
 # the URL of the repository you want this recipe to correspond to. The :deploy_to variable must be
 # the root of the application.
 
-set :keep_releases,       5
+set :keep_releases,       3
 set :application,         "translatable"
 set :user,                "g5search"
 set :password,            EY_PASSWORD
