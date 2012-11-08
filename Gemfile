@@ -39,7 +39,7 @@ unless ENV["TRAVIS"]
   #gem 'ruby-debug19', :require => 'ruby-debug', :group => [:developmen, :test]
 
   group :test do
-    gem 'rb-fsevent',               '>= 0.4.3'
+    gem 'rb-fsevent',               '0.9.2'
     gem 'growl',                    '>= 1.0.3'
     gem "spork",                    '>= 0.9.0.rc9'
   end
