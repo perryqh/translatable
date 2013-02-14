@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails',          '3.1.10'
+gem 'rails',          '3.1.11'
 
 gem 'haml',           '~> 3.1.3'
 gem 'settingslogic',  '~> 2.0.6'
@@ -9,7 +9,6 @@ gem 'redis-store',    '~> 1.0.0.rc1'
 gem "SystemTimer",    "~> 1.2"
 gem 'thin',           '~> 1.2.11'
 gem 'unicorn',        '~> 4.1.1'
-gem "eycap",          '0.5.22'
 
 gem 'therubyracer',   '~> 0.9.4', :groups => [:staging, :production]
 
@@ -25,6 +24,7 @@ gem 'jquery-rails',   "~> 1.0.14"
 
 group :development do
   gem 'capistrano',     "~> 2.8.0"
+  gem "eycap",          '0.5.22'
 end
 
 group :test do
