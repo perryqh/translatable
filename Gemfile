@@ -10,7 +10,7 @@ gem "SystemTimer",    "~> 1.2"
 gem 'thin',           '~> 1.2.11'
 gem 'unicorn',        '~> 4.1.1'
 
-gem 'therubyracer',   '~> 0.9.4', :groups => [:staging, :production]
+gem 'therubyracer', :groups => [:staging, :production]
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -29,10 +29,8 @@ end
 
 group :test do
   gem 'turn', :require => false
-  gem 'rspec-rails',              '~> 2.6.1'
-  gem 'guard-rspec',              '>= 0.4.3'
-  gem 'guard-spork',              '>= 0.2.1'
-  gem 'capybara-webkit',          '>= 0.6.1'
+  gem 'rspec-rails'
+  gem 'capybara'
 end
 
 unless ENV["TRAVIS"]
