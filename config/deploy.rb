@@ -3,6 +3,8 @@
 
 require "eycap/recipes"
 require "bundler/capistrano"
+require "config/developers/logins" if File.exist?("config/developers/logins.rb")
+
 
 # Servers
 DEMO    = "72.46.233.145:7000"
@@ -21,10 +23,10 @@ JOBS    = "72.46.233.109:7001"
 # the URL of the repository you want this recipe to correspond to. The :deploy_to variable must be
 # the root of the application.
 
-set :keep_releases,       5
+set :keep_releases,       3
 set :application,         "translatable"
 set :user,                "g5search"
-set :password,            ENV['EY_PASSWORD']
+set :password,            EY_PASSWORD
 set :deploy_to,           "/data/#{application}"
 set :monit_group,         "translatable"
 set :runner,              "g5search"
@@ -79,6 +81,12 @@ task :staging do
   role :web, STAGING
   role :app, STAGING, :mongrel => true
   set :rails_env, "staging"
+end
+
+task :demo do
+  role :web, DEMO
+  role :app, DEMO, :mongrel => true
+  set :rails_env, "demo"
 end
 
 #after "deploy:update_code", "pipeline_precompile"

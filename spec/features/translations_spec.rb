@@ -1,19 +1,14 @@
 require 'spec_helper'
 
 describe "Translations" do
-  def set_host (host)
-    host! host
-    Capybara.app_host = "http://" + host
-  end
 
   before(:each) do
-    set_host "translatable-qa.herokuapp.com"
     Translation.send(:store).flushdb
   end
 
   describe "GET /" do
     before(:each) do
-      visit translations_url
+      visit translations_path
     end
 
     it "displays i18n locale filtering" do
@@ -40,28 +35,27 @@ describe "Translations" do
       @key = "foo"
       @locale = 'en-US'
       Translation.new(:locale => @locale, :key => @key, :value => 'bar').save
-      visit translations_url(:locale => @locale)
+      visit translations_path(:locale => @locale)
       page.should have_css("tr[data-key=#{@key}]")
     end
 
+    # Note that this test actually fires up Selenium and requires you to have Firefox installed
     it "updates the translation's value", :js => true do
       within(:css, "tr[data-key=#{@key}]") {
         find('span.editable').click
         find('input[type=text]').set('baz')
         find('button.save').click
       }
-      visit translations_url(:locale => @locale)
+      page.driver.browser.switch_to.alert.accept
+      visit translations_path(:locale => @locale)
 
-      within(:css, "tbody tr[data-key=#{@key}]") {
-        find('td.key').text.should == @key
-        find('td.value span.editable').text.should == 'baz'
-      }
+      find("tbody tr[data-key=#{@key}] td.value span.editable").should have_text("baz")
     end
   end
 
   describe "create translation" do
     it "should create valid translation" do
-      visit translations_url
+      visit translations_path
       fill_in 'Key', :with => 'trankey'
       fill_in 'Value', :with => 'tranvalue'
       click_button 'Create'
@@ -69,10 +63,8 @@ describe "Translations" do
       find_field('Key').value.should be_blank
       find_field('Value').value.should be_blank
 
-      within(:css, 'tbody tr') {
-        find('td.key').text.should == 'trankey'
-        find('td.value span.editable').text.should == 'tranvalue'
-      }
+      find("tbody tr td.key").should have_text("trankey")
+      find("tbody tr td.value span.editable").should have_text("tranvalue")
     end
   end
 end
