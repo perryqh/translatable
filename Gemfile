@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails',          '3.1.11'
+gem 'rails',          '3.1.12'
 
 gem 'haml',           '~> 3.1.3'
 gem 'settingslogic',  '~> 2.0.6'
