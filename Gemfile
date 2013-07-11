@@ -30,6 +30,7 @@ group :test do
   gem 'turn', :require => false
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'poltergeist'
 end
 
 unless ENV["TRAVIS"]
