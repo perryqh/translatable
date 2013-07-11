@@ -1,7 +1,6 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    SystemTimer (1.2.3)
     actionmailer (3.1.11)
       actionpack (= 3.1.11)
       mail (~> 2.3.3)
@@ -185,7 +184,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  SystemTimer (~> 1.2)
   capistrano (~> 2.8.0)
   capybara
   coffee-rails (~> 3.1.1)
