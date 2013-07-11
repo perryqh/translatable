@@ -39,14 +39,12 @@ describe "Translations" do
       page.should have_css("tr[data-key=#{@key}]")
     end
 
-    # Note that this test actually fires up Selenium and requires you to have Firefox installed
     it "updates the translation's value", :js => true do
       within(:css, "tr[data-key=#{@key}]") {
         find('span.editable').click
         find('input[type=text]').set('baz')
         find('button.save').click
       }
-      page.driver.browser.switch_to.alert.accept
       visit translations_path(:locale => @locale)
 
       find("tbody tr[data-key=#{@key}] td.value span.editable").should have_text("baz")
