@@ -31,6 +31,7 @@ group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'poltergeist'
+  gem 'fakeredis'
 end
 
 unless ENV["TRAVIS"]
