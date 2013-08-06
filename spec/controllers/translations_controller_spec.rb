@@ -174,7 +174,7 @@ describe TranslationsController do
     context 'when new value is not UTF-8' do
       let(:value) { "testing \x97 value".force_encoding('binary') }
 
-      it 'should response successfully' do
+      it 'should respond successfully' do
         update
         expect(response).to be_success
       end
