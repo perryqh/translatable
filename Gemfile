@@ -17,8 +17,9 @@ gem 'unicorn',        '~> 4.1.1'
 gem 'therubyracer', :groups => [:staging, :production]
 
 group :development do
-  gem 'capistrano',     "~> 2.8.0"
-  gem "eycap",          '0.5.22'
+  gem "capistrano", "~> 2.14.1"
+  gem "capistrano-maintenance", :require => false
+  gem "eycap", " ~> 0.6.11", :require => false
 end
 
 group :test do
