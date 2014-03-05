@@ -2,7 +2,8 @@
 # http://www.engineyard.com/support/guides/deploying_your_application_with_capistrano
 
 require "eycap"
-require 'capistrano/maintenance'
+require "capistrano/maintenance"
+require "bundler/capistrano"
 
 parent_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 require "#{parent_dir}/config/developers/logins" if File.exist?("#{parent_dir}/config/developers/logins.rb")
