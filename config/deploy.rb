@@ -1,7 +1,8 @@
 # For complete deployment instructions, see the following support guide:
 # http://www.engineyard.com/support/guides/deploying_your_application_with_capistrano
 
-require "eycap/recipes"
+require "eycap"
+require "capistrano/maintenance"
 require "bundler/capistrano"
 
 parent_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
