@@ -13,6 +13,7 @@ gem 'settingslogic',  '~> 2.0.6'
 gem 'redis',          '~> 2.2.2'
 gem 'redis-store',    '~> 1.0.0.rc1'
 gem 'unicorn',        '~> 4.1.1'
+gem 'redis_reload', git: 'git@github.com:g5search/redis_reload.git'
 
 gem 'therubyracer', :groups => [:staging, :production]
 

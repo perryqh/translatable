@@ -1,3 +1,11 @@
+GIT
+  remote: git@github.com:g5search/redis_reload.git
+  revision: 4ac3b2fd2ee5d8600afca094df3371c503a3bfbb
+  specs:
+    redis_reload (0.0.1)
+      redis
+      redis-rdb
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -119,6 +127,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     redis (2.2.2)
+    redis-rdb (0.1.0)
     redis-store (1.0.0.1)
       redis (~> 2.2.1)
     ref (1.0.5)
@@ -184,6 +193,7 @@ DEPENDENCIES
   rb-fsevent (= 0.9.2)
   redis (~> 2.2.2)
   redis-store (~> 1.0.0.rc1)
+  redis_reload!
   rspec-rails
   sass-rails (~> 3.2.3)
   settingslogic (~> 2.0.6)
