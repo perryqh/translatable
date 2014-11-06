@@ -13,3 +13,5 @@ public/uploads/**/*
 .sass-cache/
 uploads/*
 config/developers/*
+
+/.idea/
