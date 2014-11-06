@@ -1,7 +1,12 @@
 class TranslationsController < ApplicationController
   respond_to :html, :json
 
+  before_filter :tidy_params, :only => [:create, :update]
   before_filter :load_translation, :only => [:update, :destroy]
+
+  def tidy_params
+    tidy_hash(params)
+  end
 
   def index
     @translation ||= Translation.new(:locale => locale)
@@ -14,7 +19,8 @@ class TranslationsController < ApplicationController
       flash[:notice] = "Successfully created I18N Translation."
       redirect_to translations_url
     else
-      render :action => :index
+      flash[:error] = "Error saving invalid translation."
+      render :action => :index, :status => 500
     end
   end
 
@@ -46,5 +52,17 @@ class TranslationsController < ApplicationController
   def load_translation
     @translation = Translation.find(:locale => locale, :key => params[:key])
     @translation.value = params[:value] if @translation && params[:value]
+  end
+
+  def tidy_hash(hash)
+    hash.each_pair do |k,v|
+      if v.respond_to?(:each_pair)
+        hash[k] = tidy_hash(v)
+      else
+        hash[k] = ActiveSupport::Multibyte::Unicode.tidy_bytes(v)
+      end
+    end
+
+    hash
   end
 end
