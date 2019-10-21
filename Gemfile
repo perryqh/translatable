@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails',          '3.1.1'
 
-gem 'haml',           '~> 3.1.3'
+gem 'haml',           '~> 5.0.0'
 gem 'settingslogic',  '~> 2.0.6'
 gem 'redis',          '~> 2.2.2'
 gem 'redis-store',    '~> 1.0.0.rc1'
